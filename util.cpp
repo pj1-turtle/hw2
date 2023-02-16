@@ -15,16 +15,27 @@ std::string convToLower(std::string src)
     to a set of words based on the criteria given in the assignment **/
 std::set<std::string> parseStringToWords(string rawWords)
 {
+    std::set<std::string> listOfWords; 
+    trim(rawWords);
+    stringstream s(rawWords);
+    std::string word;
+    while(s >> word){
+        int temp = 0;
+        for(int i = 0; i < word.length(); i++){
+            
+            if (ispunct(word[i])){
+                if(word.substr(temp, i-temp).length() >= 2){
+                    temp = i;
+                    listOfWords.insert(word.substr(temp, i-temp));
+                }
+            } 
+        }
+        if(word.substr(temp).find_first_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != std::string::npos){
+            listOfWords.insert(word.substr(temp));
+        }
 
-
-
-
-
-
-
-
-
-
+    }
+    return listOfWords;
 }
 
 /**************************************************
@@ -55,3 +66,4 @@ std::string &rtrim(std::string &s) {
 std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
 }
+
