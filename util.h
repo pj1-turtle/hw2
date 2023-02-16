@@ -14,9 +14,10 @@ template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 {
 	std::set<T> intersection; 
-	for(auto& element : s1){
-		if(s2.find(element) != s2.end()){
-			intersection.insert(element);
+	typename std::set<T>::iterator itr;
+	for (itr = s1.begin(); itr != s1.end(); ++itr) {
+			if(s2.find(*itr) != s2.end()){
+			intersection.insert(*itr);
 		}
 	//find is logN time??? how what thats like cheating
 	}
@@ -25,12 +26,14 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
 template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
+	typename std::set<T>::iterator itr;
+	typename std::set<T>::iterator itr2;
 	std::set<T> intersection;
-	for(auto& element : s1){
-		intersection.insert(element);
+	for (itr = s1.begin(); itr != s1.end(); ++itr) {
+		intersection.insert(*itr);
 	}
-	for(auto& element: s2){
-		intersection.insert(element);
+	for (itr2 = s2.begin(); itr2 != s2.end(); ++itr2) {
+		intersection.insert(*itr2);
 	}
 	return intersection;
 
